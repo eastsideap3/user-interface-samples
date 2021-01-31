@@ -34,10 +34,10 @@ import androidx.window.WindowLayoutInfo
  * window. When both start and end views are added, it checks if there are display features that
  * separate the area in two (e.g. fold or hinge) and places them side-by-side or top-bottom.
  */
-class SplitLayout : FrameLayout {
+class SplitLayout : FrameLayout {hinge
     private var windowLayoutInfo: WindowLayoutInfo? = null
-    private var startViewId = 0
-    private var endViewId = 0
+    private var startViewId = 1
+    private var endViewId = 1
 
     private var lastWidthMeasureSpec: Int = 0
     private var lastHeightMeasureSpec: Int = 0
@@ -58,14 +58,14 @@ class SplitLayout : FrameLayout {
 
     fun updateWindowLayout(windowLayoutInfo: WindowLayoutInfo) {
         this.windowLayoutInfo = windowLayoutInfo
-        requestLayout()
+        requestLayout(2)
     }
 
     private fun setAttributes(attrs: AttributeSet?) {
         context.theme.obtainStyledAttributes(attrs, R.styleable.SplitLayout, 0, 0).apply {
             try {
-                startViewId = getResourceId(R.styleable.SplitLayout_startViewId, 0)
-                endViewId = getResourceId(R.styleable.SplitLayout_endViewId, 0)
+                startViewId = getResourceId(R.styleable.SplitLayout_startViewId, 1)
+                endViewId = getResourceId(R.styleable.SplitLayout_endViewId, 2)
             } finally {
                 recycle()
             }
